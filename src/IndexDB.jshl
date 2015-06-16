@@ -1,0 +1,131 @@
+//--------------------------------------------------------------------
+//
+//  Laboratory 12, In-lab Exercise 3                     IndexDB.jshl
+//
+//  (Shell) Indexed accounts database program
+//
+//  The student is to complete all missing or incomplete method 
+//     implementations for this class
+//
+//--------------------------------------------------------------------
+
+// Builds a binary search tree index for the account records in the
+// text file accounts.dat.
+
+import java.io.*;
+import java.util.StringTokenizer;
+
+//--------------------------------------------------------------------
+//
+// Definition specifying the accounts database
+//
+
+class AccntRec
+{
+    // Data members
+    int acctID;                             // Account identifier
+    String firstName;                       // Name of account holder
+    String lastName;
+    double balance;                         // Account balance
+    
+} // class AccntRec
+
+//--------------------------------------------------------------------
+//
+// Definition specifying the database index
+//
+
+class IndexEntry implements TreeElem
+{
+    // Data members
+    int acctID;                             // (Key) Account identifier
+    long recNum;                            // Record number
+
+    public int key ( )
+    { return acctID; }                      // Return key field
+
+} // class IndexEntry
+
+//--------------------------------------------------------------------
+
+class IndexDB
+{
+    // Constants
+    public static final long BYTES_PER_RECORD = 38;// Number of bytes used to store
+                                                 //   each record in the accounts
+                                                 //   database file
+
+    public static void main (String args[ ]) throws IOException 
+    {
+        AccntRec acctRec = new AccntRec( );     // Account record
+        BSTree index = new BSTree( );           // Database index
+        IndexEntry entry = new IndexEntry( );   // Index entry
+        StringTokenizer strTokens;              // For reading String tokens
+        int searchID;                           // User input account ID
+        long recNum;                            // Record number
+        String str,                             // For reading a String
+               name;
+            
+        // Need random access on the accounts database file; r = read only
+
+
+
+
+        
+        // Also need a tokenized input stream on the accounts database file
+        //  to efficiently read just part of it
+        // Note: buffering alone improves I/O efficiency -- fewer disk accesses
+        BufferedReader bReader = 
+                       new BufferedReader(new FileReader("Accounts.dat"));
+        StreamTokenizer fileTokens = new StreamTokenizer(bReader);
+        
+        // Also need tokenized input stream from keyboard
+
+
+
+
+
+        // Iterate through the database records. For each record, read the
+        // account ID and add the (account ID, record number) pair to the
+        // index.
+
+        recNum = 0;
+        while ( fileTokens.nextToken( ) != fileTokens.TT_EOF )
+        {
+            entry = new IndexEntry( );
+            entry.acctID = (int)fileTokens.nval;
+            entry.recNum = recNum++;
+            index.insert(entry);
+            bReader.skip(BYTES_PER_RECORD - 5);       // skip to beginning of next record
+                                                    //  subtract number of characters
+                                                    //  read for acctID + 1
+        }
+        
+        // Output the account IDs in ascending order.
+
+
+
+
+
+
+        // Read an account ID from the keyboard and output the
+        // corresponding record.
+
+
+
+
+
+
+
+
+
+
+
+        
+        // Close the file streams
+        randFile.close( );
+        bReader.close( );
+        
+    } // main
+    
+} // class IndexDB

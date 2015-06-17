@@ -25,7 +25,7 @@ class BSTreeNode implements TreeNode {
 
     // Constructor
     BSTreeNode(Object elem, TreeNode leftPtr, TreeNode rightPtr) {
-        setElement(elem);
+        setElement(new BSTreeElem());
         setLeft(leftPtr);
         setRight(rightPtr);
     }

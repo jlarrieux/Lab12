@@ -11,6 +11,8 @@
 //
 //--------------------------------------------------------------------
 
+import sun.reflect.generics.tree.Tree;
+
 class BSTree
 {
     // Data member
@@ -25,8 +27,20 @@ class BSTree
     // Binary search tree manipulation methods
     public void insert ( TreeElem newElement )      // Insert element
     {
-        if(isEmpty()) root = new BSTreeNode(newElement,null, null);
+        root = recAdd(newElement, root);
     }
+
+
+    private TreeNode recAdd(TreeElem newElement, TreeNode node) {
+        TreeNode tempnode;
+
+        if(node == null) tempnode = new BSTreeNode(newElement,null, null);
+        else if(((TreeElem)node.getElement()).key()<newElement.key())tempnode= recAdd(newElement,node.getLeft());
+        else tempnode= recAdd(newElement, node.getRight());
+
+        return tempnode;
+    }
+
 
     public TreeElem retrieve ( int searchKey )      // Retrieve element
     {

@@ -13,6 +13,9 @@
 
 import sun.reflect.generics.tree.Tree;
 
+import javax.print.DocFlavor;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+
 class BSTree
 {
     // Data member
@@ -32,18 +35,31 @@ class BSTree
 
 
     private TreeNode recAdd(TreeElem newElement, TreeNode node) {
-        TreeNode tempnode;
 
-        if(node == null) tempnode = new BSTreeNode(newElement,null, null);
-        else if(((TreeElem)node.getElement()).key()<newElement.key())tempnode= recAdd(newElement,node.getLeft());
-        else tempnode= recAdd(newElement, node.getRight());
+        String s ="";
 
-        return tempnode;
+        if(node == null){
+            s = "Null case with element "+ String.valueOf(newElement.key());
+            node = new BSTreeNode(newElement,null, null);
+            ((BSTreeElem)node.getElement()).setKey(newElement.key());
+        }
+        else if(((TreeElem)node.getElement()).key()<newElement.key()){
+            s = "Less than case with element "+ String.valueOf(newElement.key())+ " and node " + String.valueOf(((TreeElem)node.getElement()).key());
+            node.setLeft(recAdd(newElement, node.getLeft()));
+        }
+        else{
+            s = "Greater than case with element "+ String.valueOf(newElement.key())+ " and node " + String.valueOf(((TreeElem)node.getElement()).key());
+            node.setRight(recAdd(newElement, node.getRight()));
+        }
+
+        System.out.println(s);
+        return node;
     }
 
 
     public TreeElem retrieve ( int searchKey )      // Retrieve element
     {
+        return null;
     }
 
     public void remove ( int deleteKey )            // Remove element
@@ -101,6 +117,7 @@ class BSTree
 
     public int height ( )                           // Height of tree
     {
+        return 0;
     }
 
     // Recursive partners of the public member methods

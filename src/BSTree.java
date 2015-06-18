@@ -11,11 +11,6 @@
 //
 //--------------------------------------------------------------------
 
-import sun.reflect.generics.tree.Tree;
-
-import javax.print.DocFlavor;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-
 class BSTree
 {
     // Data member
@@ -117,8 +112,26 @@ class BSTree
 
     public int height ( )                           // Height of tree
     {
-        return 0;
+
+          return subHeightRecursive(root);
     }
+
+
+    public int subHeightRecursive(TreeNode node){
+        int left, right;
+        if(node==null){
+            return  0;
+        }
+        else {
+           left = subHeightRecursive(node.getLeft())+1;
+            right=subHeightRecursive(node.getRight())+1;
+            return  Math.max(left,right);
+        }
+
+    }
+
+
+
 
     // Recursive partners of the public member methods
     // ----- insert these methods here.
